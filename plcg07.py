@@ -303,9 +303,9 @@ def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
         <body>
             <main>
                 <h1>Apresentação PLC</h1>
-                <p style="text-align: center;">Felipe Siqueira Espinheira a102513</p>
-                <p style="text-align: center;">Hugo Simões Marques a102934</p>
-                <p style="text-align: center;">José Afonso da Silva Miranda a102933</p>
+                <p style="text-align: center; font-size: 150%;">Felipe Siqueira Espinheira a102513</p>
+                <p style="text-align: center; font-size: 150%;">Hugo Simões Marques a102934</p>
+                <p style="text-align: center; font-size: 150%;">José Afonso da Silva Miranda a102933</p>
 
                 <h2>A) Doença e Géneros</h2>
                 <p>O numero total de pessoas doentes é: {totalDoentes}.</p>
@@ -349,6 +349,6 @@ def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
     with open("index.html", "w", encoding="utf-8") as html_file:
         html_file.write(ficheirohtml)
 
-    print("Página HTML 'index.html' gerada com sucesso!")
+    print("HTML gerado com sucesso!")
 
 main()
