@@ -334,6 +334,7 @@ def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
                         <img src="fig2.png">
                     </picture>
                 <h2>E) Gráficos para a distribuiçãoda B e C</h2>
+                <p>Os índices onde não  existe informação não estão representados no gráfico.</p>
                 <picture>
                     <img src="fig3.png">
                     <img src="fig4.png">
