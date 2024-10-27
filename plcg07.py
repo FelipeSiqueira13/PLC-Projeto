@@ -295,6 +295,9 @@ def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
             table, th, td {{
                 border: 1px solid black;
             }}
+            img{{
+                width: 100%;
+            }}
             </style>
         </head>
         <body>
