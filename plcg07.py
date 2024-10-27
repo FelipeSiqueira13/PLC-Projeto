@@ -1,5 +1,6 @@
 import re
 import matplotlib
+import matplotlib.pyplot as plt
 
 #A
 def doenca_total(lista):
@@ -15,13 +16,13 @@ def doenca_total(lista):
 
     generoDoenca["F"] = len(re.findall(f'[0-9]+,F,[0-9]+,[0-9]+,[0-9]+,1',lista))
 
-    doencaTotal = (generoDoenca["F"] + generoDoenca["M"])/(generoTotal["F"]+generoTotal["M"])*100
+    doencaTotal = round((generoDoenca["F"] + generoDoenca["M"])/(generoTotal["F"]+generoTotal["M"])*100,2)
 
-    doencaM = (generoDoenca["M"]/generoTotal["M"])*100
+    doencaM = round((generoDoenca["M"]/generoTotal["M"])*100,2)
 
-    doencaF = (generoDoenca["F"]/generoTotal["F"])*100
+    doencaF = round((generoDoenca["F"]/generoTotal["F"])*100,2)
 
-    return (doencaTotal, doencaM, doencaF)
+    return ((generoDoenca["F"] + generoDoenca["M"]),doencaTotal, doencaM, doencaF)
 
 #B
 def doenca_idade(lista):
@@ -40,7 +41,7 @@ def doenca_idade(lista):
 
         escaloes[escalao]["doentes"] = len(re.findall(regularDoente,lista))
         escaloes[escalao]["total"] = len(re.findall(regularTotal,lista))
-        estatisticas[escalao] = (escaloes[escalao]["doentes"]/escaloes[escalao]["total"])*100
+        estatisticas[escalao] = round((escaloes[escalao]["doentes"]/escaloes[escalao]["total"])*100,2)
     
     return estatisticas
 
@@ -73,14 +74,14 @@ def doenca_Colesterol(lista):
             regularTotal = f'[0-9]+,[MF],[0-9]+,([' + str(int(i/100)) +'][' + str(int((i/10))%10) +']['+  str(int(i%10)) +'-'+ str(9)+']|'+'[' + str(int((i+9)/100)) +'][' + str(int(((i+9)/10)%10)) +']['+  str(0) +'-'+str((i-1)%10)+']),[0-9]+,[0-1]'
             regularDoente = f'[0-9]+,[MF],[0-9]+,([' + str(int(i/100)) +'][' + str(int((i/10))%10) +']['+  str(int(i%10)) +'-'+ str(9)+']|'+'[' + str(int((i+9)/100)) +'][' + str(int(((i+9)/10)%10)) +']['+  str(0) +'-'+str((i-1)%10)+']),[0-9]+,1'
 
-        escalao = str(i)+'-'+str(i+9)
+        escalao = str(i)+'\n-\n'+str(i+9)
         escaloes[escalao] = {}
         escaloes[escalao]["doentes"] = len(re.findall(regularDoente,lista))
         escaloes[escalao]["total"] = len(re.findall(regularTotal,lista))
         if escaloes[escalao]["total"] == 0:
-            estatisticas[escalao] = -1
+            estatisticas[escalao] = "Sem informação"
         else:
-            estatisticas[escalao] = (escaloes[escalao]["doentes"]/escaloes[escalao]["total"])*100
+            estatisticas[escalao] = round((escaloes[escalao]["doentes"]/escaloes[escalao]["total"])*100,2)
     
         i+=10
 
@@ -120,12 +121,27 @@ def doenca_batimento_tensao(lista):
         escaloesTensao[escalao]["doentes"] = len(re.findall(regularDoente,lista))
         escaloesTensao[escalao]["total"] = len(re.findall(regularTotal,lista))
         if escaloesTensao[escalao]["total"] == 0:
-            estatisticasTensao[escalao] = -1
+            estatisticasTensao[escalao] = "Sem informação"
         else:
-            estatisticasTensao[escalao] = (escaloesTensao[escalao]["doentes"]/escaloesTensao[escalao]["total"])*100
+            estatisticasTensao[escalao] = round((escaloesTensao[escalao]["doentes"]/escaloesTensao[escalao]["total"])*100,2)
     
         i+=10
 
+    x = []
+    y = []
+    for i in estatisticasTensao:
+        x.append(i)
+        y.append(estatisticasTensao[i])
+    
+    plt.plot(x,y)
+
+    plt.xlabel("Tensão")
+    plt.ylabel("Doença")
+
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('fig1.png', dpi=100)
+    plt.close()
     #batimento
 
     menor = int(dividido[10])
@@ -158,17 +174,66 @@ def doenca_batimento_tensao(lista):
         escaloesBatimento[escalao]["doentes"] = len(re.findall(regularDoente,lista))
         escaloesBatimento[escalao]["total"] = len(re.findall(regularTotal,lista))
         if escaloesBatimento[escalao]["total"] == 0:
-            estatisticasBatimento[escalao] = -1
+            estatisticasBatimento[escalao] = "Sem informação"
         else:
-            estatisticasBatimento[escalao] = (escaloesBatimento[escalao]["doentes"]/escaloesBatimento[escalao]["total"])*100
+            estatisticasBatimento[escalao] = round((escaloesBatimento[escalao]["doentes"]/escaloesBatimento[escalao]["total"])*100,2)
     
         i+=10
+    
+    x = []
+    y = []
+    for i in estatisticasBatimento:
+        x.append(i)
+        y.append(estatisticasBatimento[i])
+    
+    plt.plot(x,y)
+
+    plt.xlabel("Batimento")
+    plt.ylabel("Doença")
+
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('fig2.png', dpi=100)
+    plt.close()
+
     
 
 
 #E
-#def criar_grafico(A,B,C,D):
+def criar_grafico(estatisticasIdade,estatisticasColesterol):
+    x = []
+    y = []
+    for i in estatisticasIdade:
+        x.append(i)
+        y.append(estatisticasIdade[i])
+    
+    plt.bar(x,y)
 
+    plt.xlabel("Idade")
+    plt.ylabel("Doença")
+
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('fig3.png', dpi=100)
+    plt.close()
+
+    x = []
+    y = []
+    for i in estatisticasColesterol:
+        if estatisticasColesterol[i] != "Sem informação":
+            x.append(i)
+            y.append(estatisticasColesterol[i])
+    
+    plt.bar(x,y)
+
+    plt.xlabel("Colesterol")
+    plt.ylabel("Doença")
+
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(18.5, 10.5)
+    fig.savefig('fig4.png', dpi=100)
+
+    plt.close()
 
 def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
     f = open("myheart.csv", "r")
@@ -176,18 +241,110 @@ def main(): #[0-9]+,[MF],[0-9]+,[0-9]+,[0-9]+,[0,1]
     f.close()
 
 
-    (doencaTotal, doencaM, doencaF) = doenca_total(lista)
+    (totalDoentes,doencaTotal, doencaM, doencaF) = doenca_total(lista)
     #print("doença total é ", doencaTotal)
     #print("doença M é ", doencaM)
     #print("doença F é ", doencaF)
 
 
     estatisticasIdade = doenca_idade(lista)
-    #print(estatisticasIdade)
+
+    mudaraquiIdade = ""
+
+    for i in estatisticasIdade:
+        mudaraquiIdade += "<tr><td>"+i+"</td><td>"+str(estatisticasIdade[i])+"</td></tr>"
+
 
     estatisticasColesterol = doenca_Colesterol(lista)
+  
+    mudaraquiColesterol = ""
+
+    for i in estatisticasColesterol:
+        mudaraquiColesterol += "<tr><td>"+i+"</td><td>"+str(estatisticasColesterol[i])+"</td></tr>"
+
     #print(estatisticasColesterol)
 
     doenca_batimento_tensao(lista)
+
+    criar_grafico(estatisticasIdade,estatisticasColesterol)
+
+
+    ficheirohtml = f"""<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>G07 - Apresentação PLC</title>
+            <style>
+            body{{
+                background-color: rgb(63, 63, 201);
+            }}
+            main{{
+                background-color: rgb(255, 255, 255);
+                border-radius: 10px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.425);
+                width: 80%;
+                padding: 20px;
+                margin: auto;
+                text-align: center;
+            }}
+            p{{
+                text-align: left;
+                font-size: 120%;
+            }}
+            table, th, td {{
+                border: 1px solid black;
+            }}
+            </style>
+        </head>
+        <body>
+            <main>
+                <h1>Apresentação PLC</h1>
+                <p style="text-align: center;">Felipe Siqueira Espinheira a102513</p>
+                <p style="text-align: center;">Hugo Simões Marques a102934</p>
+                <p style="text-align: center;">José Afonso da Silva Miranda a102933</p>
+
+                <h2>A) Doença e Géneros</h2>
+                <p>O numero total de pessoas doentes é: {totalDoentes}.</p>
+                <p>A percentagem de doentes no total é: {doencaTotal}.</p>
+                <p>A percentagem doentes do género masculino: {doencaM}.</p>
+                <p>A percentagem doentes do género feminino: {doencaF}.</p>
+
+                <h2>B) Distribuição por escalão de idade</h2>
+                <table style="width:100%">
+                    <tr>
+                    <th>Idade</th>
+                    <th>Percentagem de doentes</th>
+                    </tr>
+                    {mudaraquiIdade}
+                </table>
+                <h2>C) Distribuição por escalão de colesterol</h2>
+                    <table style="width:100%">
+                        <tr>
+                        <th>Colesterol</th>
+                        <th>Percentagem de doentes</th>
+                        </tr>
+                        {mudaraquiColesterol}
+                    </table>
+                <h2>D) Distribuição por tensão e Distribuição de Batimentos</h2>
+                    <p>A correlação entre doença e tensão é fraca, com um aumento não muito significativo da % de pessoas com doença nos escalões mais altos, isto pode ser devido à falta de dados.</p>
+                    <p>No outro lado, a correlação entre batimento e doença é notável, com uma diminuição da percentagem de pessoas doentes quanto mais alta é o seu batimento.</p>
+                    <picture>
+                        <img src="fig1.png">
+                        <img src="fig2.png">
+                    </picture>
+                <h2>E) Gráficos para a distribuiçãoda B e C</h2>
+                <picture>
+                    <img src="fig3.png">
+                    <img src="fig4.png">
+                </picture>
+            </main>
+        </body>
+        </html>"""
+    
+    with open("index.html", "w", encoding="utf-8") as html_file:
+        html_file.write(ficheirohtml)
+
+    print("Página HTML 'index.html' gerada com sucesso!")
 
 main()
