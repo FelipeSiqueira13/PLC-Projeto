@@ -1,4 +1,21 @@
 import re
+
+#A
+#def doenca_total(listaDoentes, listaGenero):
+
+#B
+#def doenca_idade(listaDoentes, listaIdade): 
+
+#C
+#def doenca_Colesterol(listaDoentes, listaColesterol):
+
+#D
+#def doenca_batimento_tensao(listaDoentes, listaBatimento, listaTensao):
+
+#E
+#def criar_grafico(A,B,C,D):
+
+
 def main():
     f = open("myheart.csv", "r")
     arcs = [] #idade, sexo, tensao, colesterol, batimento, temDoenca
@@ -12,16 +29,12 @@ def main():
     for linha in f:
         info = re.split(",", linha.rstrip('\n'))
         for i in range(max):
-            lista[arcs[i]].append(info[i])
-    
-    print(lista)
-    #temos que transformar os numeros em INT
-    generoDoenca = {"M":0, "F":0}
-    for i in range(len(lista[arcs[0]])):
-        print(lista[arcs[5]][i])
-        if(lista[arcs[5]][i]) == "1":
-            generoDoenca[lista[arcs[1]][i]]+=1
-    print(generoDoenca)
+            if info[i] == 'M' or info[i] == 'F':
+                lista[arcs[i]].append(info[i])
+            else:
+                lista[arcs[i]].append(int(info[i]))
+    f.close()
 
+    print(lista)
 
 main()
