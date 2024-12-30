@@ -1,3 +1,11 @@
+"""
+G07 - Apresentação PLC
+Felipe Siqueira Espinheira a102513
+Hugo Simões Marques a102934
+José Afonso da Silva Miranda a102933
+"""
+
+
 import re
 import matplotlib
 import matplotlib.pyplot as plt
