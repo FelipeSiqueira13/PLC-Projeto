@@ -7,8 +7,11 @@ tokens = (
     # Tipos da linguagem
     'NUM', 'TEXTO', 'VAR',
 
+    #declarações
+    'inteiro',
+
     # Funções
-    'se', 'enquanto', 'ler', 'escreva', 'entao', 'fim', 'senao se', 'senao',
+    'se', 'enquanto', 'ler', 'escreva', 'entao', 'fim', 'senao_se', 'senao',
 
     # Operações Lógicas
     'e', 'ou', 'nao', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese'
@@ -32,6 +35,12 @@ def t_VAR(t):
     r'[a-zA-Z][a-zA-Z0-9]*'
     return t
 
+    # Declarações
+
+def t_inteiro(t):
+    r'inteiro'
+    return t
+
     # Funções
 
 def t_se(t):
@@ -48,6 +57,10 @@ def t_ler(t):
 
 def t_escreva(t):
     r'escreva'
+    return t
+
+def t_senao_se(t):
+    r'senao se'
     return t
 
 def t_senao(t):
@@ -76,30 +89,13 @@ def t_nao(t):
     r'nao'
     return t
 
-def t_maior(t):
-    r'>'
-    return t
-
-def t_maior_igual(t):
-    r'>='
-    return t
-
-def t_menor(t):
-    r'<'
-    return t
-
-def t_menor_igual(t):
-    r'<='
-    return t
-
-def t_igual(t):
-    r'=='
-    return t
-
-def t_diferente(t):
-    r'!='
-    return t
-
+t_maior = r'>'
+t_maior_igual = r'>='
+t_menor = r'<'
+t_menor_igual = r'<='
+t_igual = r'='
+t_diferente = r'!='
+    
 def t_E_parentese(t):
     r'\('
     return t
@@ -107,6 +103,7 @@ def t_E_parentese(t):
 def t_D_parentese(t):
     r'\)'
     return t
+
 
     # Operações Aritiméticas
 
