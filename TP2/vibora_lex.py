@@ -5,13 +5,13 @@ literals = [';' , '=',',']
 
 tokens = (
     # Tipos da linguagem
-    'NUM', 'TEXTO', 'VAR',
+    'NUM', 'TEXTO', 'VAR', 'chamada',
 
     #declarações
-    'DECINTEIRO',
+    'DECINTEIRO', 'def',
 
     # Funções
-    'se', 'enquanto', 'faz', 'ler', 'escreva', 'entao', 'fim', 'senaose', 'senao',
+    'se', 'enquanto', 'faz', 'ler', 'escreva', 'entao', 'fim', 'senaose', 'senao', 'retorna',
 
     # Operações Lógicas
     'e', 'ou', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese',
@@ -30,24 +30,10 @@ def t_DECINTEIRO(t):
 def t_TEXTO(t):
     r'\"[^"]*\"'
     return t
-
     
-def t_NUM(t):
-    r'[0-9]+'
-    #t.value = int(t.value) 
-    return t
-    
-def t_VAR(t):
-    r'[a-zA-Z][a-zA-Z0-9]*'
-    return t
-
 
     # Funções
 
-
-def t_se(t):
-    r'se'
-    return t
 
 def t_enquanto(t):
     r'enquanto'
@@ -73,12 +59,24 @@ def t_senao(t):
     r'senao'
     return t
 
+def t_se(t):
+    r'se'
+    return t
+
 def t_entao(t):
     r'entao'
     return t
 
 def t_fim(t):
     r'fim'
+    return t
+
+def t_retorna(t):
+    r'retorna'
+    return t
+
+def t_def(t):
+    r'def'
     return t
 
     #Operações Lógicas
@@ -124,6 +122,17 @@ def t_divisao(t):
     r'\/'
     return t
 
+def t_chamada(t):
+    r'[a-zA-Z][a-zA-Z0-9]*\(\)'
+    return t
+
+def t_VAR(t):
+    r'[a-zA-Z][a-zA-Z0-9]*'
+    return t
+
+def t_NUM(t):
+    r'-?[0-9]+'
+    return t
 
 t_ignore = ' \n\t'
 
@@ -137,3 +146,11 @@ def t_error(t):
 
 
 lexer = lex.lex()
+
+#if __name__ == "__main__":
+#    with open(r'.\TP2\E1.txt', "r") as f:
+#        data = f.read()
+#    lexer.input(data)
+#    for token in lexer:
+#        print(token)
+
