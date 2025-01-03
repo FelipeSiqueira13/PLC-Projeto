@@ -1,24 +1,30 @@
 import ply.lex as lex
 import sys
 
-literals = [';' , '=', '<', '>','(',')',',','!','+','-','*','/']
+literals = [';' , '=',',']
 
 tokens = (
     # Tipos da linguagem
     'NUM', 'TEXTO', 'VAR',
 
     #declarações
-    'inteiro',
+    'DECINTEIRO',
 
     # Funções
-    'se', 'enquanto', 'ler', 'escreva', 'entao', 'fim', 'senao_se', 'senao',
+    'se', 'enquanto', 'faz', 'ler', 'escreva', 'entao', 'fim', 'senaose', 'senao',
 
     # Operações Lógicas
-    'e', 'ou', 'nao', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese'
+    'e', 'ou', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese',
 
     # Operações Aritiméticas
     'soma', 'subtracao', 'multiplicacao', 'divisao'
 )
+
+
+    # Declarações
+def t_DECINTEIRO(t):
+    r'inteiro'
+    return t
 
     # Tipos
 def t_TEXTO(t):
@@ -35,13 +41,9 @@ def t_VAR(t):
     r'[a-zA-Z][a-zA-Z0-9]*'
     return t
 
-    # Declarações
-
-def t_inteiro(t):
-    r'inteiro'
-    return t
 
     # Funções
+
 
 def t_se(t):
     r'se'
@@ -49,6 +51,10 @@ def t_se(t):
 
 def t_enquanto(t):
     r'enquanto'
+    return t
+
+def t_faz(t):
+    r'faz'
     return t
 
 def t_ler(t):
@@ -59,8 +65,8 @@ def t_escreva(t):
     r'escreva'
     return t
 
-def t_senao_se(t):
-    r'senao se'
+def t_senaose(t):
+    r'senaose'
     return t
 
 def t_senao(t):
@@ -85,15 +91,11 @@ def t_ou(t):
     r'ou'
     return t
 
-def t_nao(t):
-    r'nao'
-    return t
-
 t_maior = r'>'
 t_maior_igual = r'>='
 t_menor = r'<'
 t_menor_igual = r'<='
-t_igual = r'='
+t_igual = r'=='
 t_diferente = r'!='
     
 def t_E_parentese(t):
@@ -103,7 +105,6 @@ def t_E_parentese(t):
 def t_D_parentese(t):
     r'\)'
     return t
-
 
     # Operações Aritiméticas
 
@@ -131,7 +132,8 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 def t_error(t):
-    print('Illegal character: ', t.value[0])
+    print(f"Illegal character '{t.value[0]}' at line {t.lineno}")
     t.lexer.skip(1)
+
 
 lexer = lex.lex()
