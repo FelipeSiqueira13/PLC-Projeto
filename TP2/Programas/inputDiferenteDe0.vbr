@@ -1,0 +1,8 @@
+inteiro x;
+
+x = ler("Digite x");
+se (nao(x == 0)) entao
+    escreva("x é diferente de 0");
+senao
+    escreva("x é igual a 0");
+fim

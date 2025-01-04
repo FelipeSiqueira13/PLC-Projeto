@@ -1,0 +1,31 @@
+PUSHI 0
+
+START
+JUMP main
+
+main:
+PUSHS "Digite x"
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+PUSHG 0
+PUSHI 0
+EQUAL
+NOT
+JZ else1
+PUSHS "x é diferente de 0"
+WRITES
+PUSHS"\n"
+WRITES
+JUMP fim1
+else1:
+PUSHS "x é igual a 0"
+WRITES
+PUSHS"\n"
+WRITES
+fim1:
+
+STOP

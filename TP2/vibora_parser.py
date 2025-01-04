@@ -10,6 +10,7 @@ precedence = (
     ('left', 'menor', 'maior', 'menor_igual', 'maior_igual'),
     ('left', 'soma', 'subtracao'),
     ('left', 'multiplicacao', 'divisao'),
+    ('right', 'elevado'),
     ('right', '='),
 )
 
@@ -142,16 +143,29 @@ def p_expressao7(p):
     p[0] = f'{p[1]}{p[3]}MOD\n'
 
 def p_expressao8(p):
+    'expressao :  abs expressao abs'
+    p.parser.preDef += 1
+    p[0] = f'{p[2]}DUP 1\nPUSHI 0\nINF\nJZ fimPreDef{p.parser.preDef}\nPUSHI -1\nMUL\nfimPreDef{p.parser.preDef}:\n'
+
+def p_expressao9(p):
+    'expressao : expressao elevado expressao'
+    p.parser.preDef += 1
+    p[0] = f'{p[1]}DUP 1\n{p[3]}PUSHI 1\nSUB\ninicioloopPreDef{p.parser.preDef}:\nDUP 1\nJZ fimloopPreDef{p.parser.preDef}\nSWAP\nPUSHSP\nPUSHI -2\nPADD\nLOAD 0\nMUL\nSWAP\nPUSHI 1\nSUB\nJUMP inicioloopPreDef{p.parser.preDef}\nfimloopPreDef{p.parser.preDef}:\nPOP 1\nSWAP\nPOP 1\n'
+
+def p_expressao10(p):
     'expressao :  E_parentese expressao D_parentese'
     p[0] = f'{p[2]}'
 
-def p_expressao9(p):
+def p_expressao11(p):
+    'expressao :  subtracao expressao'
+    p[0] = f'{p[2]}PUSHI -1\nMUL\n'
+
+def p_expressao12(p):
     'expressao : chamada'
     if p[1] in p.parser.funcoesComRetorno:
         p[0] = f'PUSHA func{p.parser.funcoesComRetorno.get(p[1])}\nCALL\n'
     else:
         print("Error: Esta funçao nao existe ou nao tem retorno")
-        print(p.parser.funcoesComRetorno, p.parser.funcoesSemRetorno, p.parser.registers, p.parser.funcoes, p[1])
         parser.exito = False
 
 def p_cfuncao(p):
@@ -168,7 +182,7 @@ def p_cler(p):
 
 def p_cescreva(p):
     'cescreva : escreva E_parentese escrevatexto D_parentese ";" '
-    p[0] = f'{p[3]}'
+    p[0] = f'{p[3]}PUSHS"\\n"\nWRITES\n'
 
 def p_cse(p):
     'cse : se E_parentese condicoes D_parentese entao linhas csezinho'
@@ -206,6 +220,10 @@ def p_condicoes3(p):
     p[0] = f'{p[1]}{p[3]}OR\n'
 
 def p_condicoes4(p):
+    'condicoes : nao E_parentese condicoes D_parentese'
+    p[0] = f'{p[3]}NOT\n'
+
+def p_condicoes5(p):
     'condicoes : E_parentese condicoes D_parentese'
     p[0] = f'{p[2]}'
 
@@ -239,7 +257,7 @@ def p_comparacao6(p):
 
 def p_escrevatexto(p):
     'escrevatexto : escrevatexto "," escrevatextofinal'
-    p[0] = f'{p[1]}PUSHS " "\nWRITES\n{p[3]}PUSHS"\\n"\nWRITES\n'
+    p[0] = f'{p[1]}PUSHS " "\nWRITES\n{p[3]}'
 
 def p_textvar2(p):
     'escrevatexto : escrevatextofinal'
@@ -257,7 +275,7 @@ def p_error(p):
     if p:
         # Use p.lexer.lexdata para acessar o contexto
         print(f"Syntax error at token {p.type}, value '{p.value}', line {getattr(p, 'lineno', 'unknown')}")
-        print(f"Parser context: {p.lexer.lexdata[:p.lexpos]} << ERROR HERE >> {p.lexer.lexdata[p.lexpos:]}")
+        print(f"Parser context: \n{p.lexer.lexdata[:p.lexpos]} << ERROR HERE >> {p.lexer.lexdata[p.lexpos:]}")
     else:
         print("Syntax error at EOF")
 
@@ -270,6 +288,7 @@ parser.funcoesComRetorno = {}
 parser.funcoesSemRetorno = {}
 parser.elses = 0
 parser.enquantos = 0
+parser.preDef = 0
 parser.gp = 0
 parser.funcoes = 1
 

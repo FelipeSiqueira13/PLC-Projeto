@@ -22,6 +22,8 @@ OR
 JZ else2
 PUSHS "não pode usar esse numero."
 WRITES
+PUSHS"\n"
+WRITES
 JUMP fim2
 else2:
 inicioloop1:
@@ -54,6 +56,8 @@ INF
 OR
 JZ else1
 PUSHS "erro"
+WRITES
+PUSHS"\n"
 WRITES
 PUSHI 10
 STOREG 0

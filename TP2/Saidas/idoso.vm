@@ -21,6 +21,8 @@ AND
 JZ else2
 PUSHS "está na idade de trabalhar"
 WRITES
+PUSHS"\n"
+WRITES
 JUMP fim2
 else2:
 PUSHG 0
@@ -29,9 +31,13 @@ INF
 JZ else1
 PUSHS "vai estudar puto"
 WRITES
+PUSHS"\n"
+WRITES
 JUMP fim1
 else1:
 PUSHS "pode se reformar"
+WRITES
+PUSHS"\n"
 WRITES
 fim1:
 fim2:

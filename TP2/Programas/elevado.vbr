@@ -1,0 +1,16 @@
+inteiro x;
+inteiro y;
+inteiro z;
+
+x = ler("Digite x");
+y = 2;
+z = 6;
+
+enquanto (x == -32 ou (y*z == 40 e y != 6) ou y*z == 60) faz
+    x = x-1;
+    y = y+1;
+    z = z+1;
+fim
+
+
+escreva("x,y,z é",x,y,z);

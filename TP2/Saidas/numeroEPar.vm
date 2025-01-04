@@ -65,9 +65,13 @@ EQUAL
 JZ else3
 PUSHS "x é par"
 WRITES
+PUSHS"\n"
+WRITES
 JUMP fim3
 else3:
 PUSHS "x não é par"
+WRITES
+PUSHS"\n"
 WRITES
 fim3:
 

@@ -1,0 +1,10 @@
+inteiro x;
+inteiro y;
+
+x = ler("Digite x");
+
+x = |x|;
+
+y = |x * -1|;
+
+escreva("x,y é",x,y);

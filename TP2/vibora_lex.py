@@ -1,7 +1,8 @@
 import ply.lex as lex
 import sys
 
-literals = [';' , '=',',']
+literals = ['+','-','*','/','%','=',
+            '(',')',';',',','<','>','!','^']
 
 tokens = (
     # Tipos da linguagem
@@ -14,10 +15,10 @@ tokens = (
     'se', 'enquanto', 'faz', 'ler', 'escreva', 'entao', 'fim', 'senaose', 'senao', 'retorna',
 
     # Operações Lógicas
-    'e', 'ou', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese',
+    'e', 'ou', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese', 'nao',
 
     # Operações Aritiméticas
-    'soma', 'subtracao', 'multiplicacao', 'divisao', 'mod'
+    'soma', 'subtracao', 'multiplicacao', 'divisao', 'mod', 'abs', 'elevado'
 )
 
 
@@ -29,6 +30,10 @@ def t_DECINTEIRO(t):
     # Tipos
 def t_TEXTO(t):
     r'\"[^"]*\"'
+    return t
+
+def t_NUM(t):
+    r'[0-9]+'
     return t
     
 
@@ -57,6 +62,10 @@ def t_senaose(t):
 
 def t_senao(t):
     r'senao'
+    return t
+
+def t_nao(t):
+    r'nao'
     return t
 
 def t_se(t):
@@ -126,6 +135,14 @@ def t_mod(t):
     r'%'
     return t
 
+def t_abs(t):
+    r'\|'
+    return t
+
+def t_elevado(t):
+    r'\^'
+    return t
+
 def t_chamada(t):
     r'[a-zA-Z][a-zA-Z0-9]*\(\)'
     return t
@@ -134,9 +151,6 @@ def t_VAR(t):
     r'[a-zA-Z][a-zA-Z0-9]*'
     return t
 
-def t_NUM(t):
-    r'-?[0-9]+'
-    return t
 
 t_ignore = ' \n\t'
 
@@ -151,10 +165,10 @@ def t_error(t):
 
 lexer = lex.lex()
 
-#if __name__ == "__main__":
-#    with open(f'.\\TP2\\Programas\\menoresque.vbr', "r") as f:
-#        data = f.read()
-#    lexer.input(data)
-#    for token in lexer:
-#        print(token)
+if __name__ == "__main__":
+    with open(f'.\\TP2\\Programas\\elevado.vbr', "r") as f:
+        data = f.read()
+    lexer.input(data)
+    for token in lexer:
+        print(token)
 
