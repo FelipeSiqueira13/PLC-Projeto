@@ -1,0 +1,74 @@
+PUSHI 0
+PUSHI 0
+
+START
+JUMP main
+func1:
+PUSHG 0
+STOREG 1
+inicioloop1:
+PUSHG 1
+PUSHI 0
+EQUAL
+NOT
+PUSHG 1
+PUSHI 1
+EQUAL
+NOT
+AND
+JZ fimloop1
+PUSHG 1
+PUSHI 0
+SUP
+JZ else1
+PUSHG 1
+PUSHI 2
+SUB
+STOREG 1
+JUMP fim1
+else1:
+PUSHG 1
+PUSHI 2
+ADD
+STOREG 1
+fim1:
+JUMP inicioloop1
+fimloop1:
+PUSHG 1
+PUSHI 1
+EQUAL
+JZ else2
+PUSHI 0
+STOREG 1
+JUMP fim2
+else2:
+PUSHI 1
+STOREG 1
+fim2:
+PUSHG 1
+RETURN
+
+main:
+PUSHS "digite x"
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+PUSHA func1
+CALL
+STOREG 0
+PUSHG 0
+PUSHI 1
+EQUAL
+JZ else3
+PUSHS "x é par"
+WRITES
+JUMP fim3
+else3:
+PUSHS "x não é par"
+WRITES
+fim3:
+
+STOP

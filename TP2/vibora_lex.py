@@ -152,7 +152,7 @@ def t_error(t):
 lexer = lex.lex()
 
 #if __name__ == "__main__":
-#    with open(r'.\TP2\E1.txt', "r") as f:
+#    with open(f'.\\TP2\\Programas\\menoresque.vbr', "r") as f:
 #        data = f.read()
 #    lexer.input(data)
 #    for token in lexer:

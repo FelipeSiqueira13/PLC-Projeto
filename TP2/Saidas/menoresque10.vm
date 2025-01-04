@@ -1,0 +1,75 @@
+PUSHI 0
+PUSHI 0
+
+START
+JUMP main
+
+main:
+PUSHS "diga o numero mais a esquerda "
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+PUSHG 0
+PUSHI 10
+SUPEQ
+PUSHG 0
+PUSHI 0
+INF
+OR
+JZ else2
+PUSHS "não pode usar esse numero."
+WRITES
+JUMP fim2
+else2:
+inicioloop1:
+PUSHG 0
+PUSHI 10
+EQUAL
+NOT
+JZ fimloop1
+PUSHG 1
+PUSHI 10
+MUL
+STOREG 1
+PUSHG 1
+PUSHG 0
+ADD
+STOREG 1
+PUSHS "escreva um numero de 0 a 9 para adicionar ou 10 para finalizar"
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+PUSHG 0
+PUSHI 10
+SUP
+PUSHG 0
+PUSHI 0
+INF
+OR
+JZ else1
+PUSHS "erro"
+WRITES
+PUSHI 10
+STOREG 0
+JUMP fim1
+else1:
+fim1:
+JUMP inicioloop1
+fimloop1:
+PUSHS "o numero final e"
+WRITES
+PUSHS " "
+WRITES
+PUSHG 1
+WRITEI
+PUSHS"\n"
+WRITES
+fim2:
+
+STOP

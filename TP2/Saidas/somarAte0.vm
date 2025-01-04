@@ -1,0 +1,43 @@
+PUSHI 0
+PUSHI 0
+
+START
+JUMP main
+
+main:
+PUSHS "digite um numero para adicionar na sequencia: "
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+inicioloop1:
+PUSHG 0
+PUSHI 0
+EQUAL
+NOT
+JZ fimloop1
+PUSHG 1
+PUSHG 0
+ADD
+STOREG 1
+PUSHS "digite o proximo numero: "
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+JUMP inicioloop1
+fimloop1:
+PUSHS "a soma deu "
+WRITES
+PUSHS " "
+WRITES
+PUSHG 1
+WRITEI
+PUSHS"\n"
+WRITES
+
+STOP

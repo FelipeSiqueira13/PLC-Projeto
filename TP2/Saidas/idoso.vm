@@ -1,0 +1,39 @@
+PUSHI 0
+
+START
+JUMP main
+
+main:
+PUSHS "qual sua idade?"
+WRITES
+PUSHS "\n"
+WRITES
+READ
+ATOI
+STOREG 0
+PUSHG 0
+PUSHI 20
+SUPEQ
+PUSHG 0
+PUSHI 66
+INF
+AND
+JZ else2
+PUSHS "está na idade de trabalhar"
+WRITES
+JUMP fim2
+else2:
+PUSHG 0
+PUSHI 20
+INF
+JZ else1
+PUSHS "vai estudar puto"
+WRITES
+JUMP fim1
+else1:
+PUSHS "pode se reformar"
+WRITES
+fim1:
+fim2:
+
+STOP

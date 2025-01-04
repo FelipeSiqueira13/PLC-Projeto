@@ -1,0 +1,28 @@
+inteiro x;
+inteiro y;
+
+def xePar()
+	y = x;
+	enquanto (y != 0 e y!= 1) faz
+		se (y > 0) entao
+			y = y-2;
+		senao
+			y = y+2;
+		fim
+	fim
+	se (y == 1) entao
+		y = 0;
+	senao
+		y = 1;
+	fim
+	retorna y;
+fim
+
+
+x = ler("digite x");
+x = xePar();
+se (x == 1) entao
+	escreva("x é par");
+senao
+	escreva("x não é par");
+fim

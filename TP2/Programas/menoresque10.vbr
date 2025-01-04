@@ -1,0 +1,18 @@
+inteiro x;
+inteiro final;
+x = ler("diga o numero mais a esquerda ");
+se(x >= 10 ou x < 0) entao
+	escreva("não pode usar esse numero.");
+senao
+	enquanto(x != 10) faz
+		final = final * 10;
+		final = final + x;
+		x = ler("escreva um numero de 0 a 9 para adicionar ou 10 para finalizar");
+		se(x > 10 ou x < 0) entao
+			escreva("erro");
+			x = 10;
+		fim
+	fim		
+escreva("o numero final e",final);
+fim
+

@@ -1,5 +1,6 @@
 import ply.yacc as yacc
-import sys
+import os
+import re
 
 from vibora_lex import tokens
 
@@ -274,18 +275,61 @@ parser.funcoes = 1
 
 parser.assembly = ""
 
+folder_path = f'.\\TP2\\Programas'
 
-try:
-    with open(r'.\TP2\E1.txt','r') as file:
-        inp = file.read()
-        parser.parse(inp)
-        if parser.exito:
-            with open(r'.\TP2\E1.vm', 'w') as output:
-                output.write(parser.assembly)
-                print(parser.assembly)
-        else:
-            print("<><><><><><><><><><><><><><><><><><><><><><><>")
-            print("Erro")
-            print("<><><><><><><><><><><><><><><><><><><><><><><>")
-except KeyboardInterrupt:
-    print()
+files = os.listdir(folder_path)
+
+if len(files) > 1:
+
+    i = 0
+
+    escolha = "Ficheiros encontrados em Programas: \n"
+
+    for file in files:
+        escolha += str(i) + " : " + file + "\n" 
+        i += 1
+
+    print(escolha)
+    escolhido = int(input(f"Que programa deseja rodar? (escolha um numero de 0 a {i-1})"))
+
+    while (escolhido < 0 or escolhido >= i):
+        print(f"Numero escolhido nao esta entre 0 e {i-1}.")
+        escolhido = int(input(f"Que programa deseja rodar? (escolha um numero de 0 a {i-1})"))
+
+    ficheiro = files[escolhido]
+
+elif len(files) == 1:
+    print("Encontrado um unico ficheiro, convertendo.")
+    ficheiro = files[0]
+
+else:
+    print("Nenhum ficheiro encontrado.")
+
+
+
+file_path = os.path.join(folder_path, ficheiro)
+with open(file_path, 'r') as f:
+    inp = f.read()
+    parser.parse(inp)
+    if parser.exito:
+        nomeDoFicheiro = re.search(r'(.+)\.vbr',ficheiro)
+        with open(f'.\\TP2\\Saidas\\{nomeDoFicheiro.group(1)}.vm', 'w') as output:
+            print("Codigo gerado com sucesso.")
+            output.write(parser.assembly)
+    else:
+        print("-------------------------------------------------------------")
+        print("Erro")
+        print("-------------------------------------------------------------")
+
+
+#with open(r'.\TP2\Programas\idoso.vbr','r') as file:
+#    inp = file.read()
+#    parser.parse(inp)
+#    if parser.exito:
+#        with open(r'.\TP2\Saidas\idoso.vm', 'w') as output:
+#            output.write(parser.assembly)
+#            print(parser.assembly)
+#    else:
+#        print("<><><><><><><><><><><><><><><><><><><><><><><>")
+#        print("Erro")
+#        print("<><><><><><><><><><><><><><><><><><><><><><><>")

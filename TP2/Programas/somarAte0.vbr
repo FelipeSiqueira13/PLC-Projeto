@@ -1,0 +1,8 @@
+inteiro x;
+inteiro somatorio;
+x = ler("digite um numero para adicionar na sequencia: ");
+enquanto(x != 0) faz
+	somatorio = somatorio + x;
+	x = ler("digite o proximo numero: ");
+fim
+escreva("a soma deu ", somatorio);

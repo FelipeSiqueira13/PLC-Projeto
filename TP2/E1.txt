@@ -1,8 +1,0 @@
-inteiro x;
-inteiro y;
-inteiro resultado;
-
-x = ler("digite x");
-y = ler("digite y");
-resultado = x % y;
-escreva("x % a y é",resultado);

@@ -1,0 +1,17 @@
+
+inteiro x;
+inteiro y;
+
+def xElevadoAy()
+	enquanto (y > 0) faz
+		x = x*x;
+		y = y-1;
+	fim
+	retorna;
+fim
+
+x = ler("digite x");
+y = ler("digite y");
+xElevadoAy();
+escreva("x elevado a y é",x);
+	
