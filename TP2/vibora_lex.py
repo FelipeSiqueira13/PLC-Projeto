@@ -17,7 +17,7 @@ tokens = (
     'e', 'ou', 'maior', 'maior_igual', 'menor', 'menor_igual', 'igual', 'diferente', 'E_parentese', 'D_parentese',
 
     # Operações Aritiméticas
-    'soma', 'subtracao', 'multiplicacao', 'divisao'
+    'soma', 'subtracao', 'multiplicacao', 'divisao', 'mod'
 )
 
 
@@ -120,6 +120,10 @@ def t_multiplicacao(t):
 
 def t_divisao(t):
     r'\/'
+    return t
+
+def t_mod(t):
+    r'%'
     return t
 
 def t_chamada(t):

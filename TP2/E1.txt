@@ -2,16 +2,7 @@ inteiro x;
 inteiro y;
 inteiro resultado;
 
-def xElevadoAy()
-	resultado = x;
-	enquanto (y > 1) faz
-		resultado = resultado*x;
-		y = y-1;
-	fim
-	retorna;
-fim
-
 x = ler("digite x");
 y = ler("digite y");
-xElevadoAy();
-escreva("x elevado a y é",resultado);
+resultado = x % y;
+escreva("x % a y é",resultado);

@@ -17,8 +17,8 @@ def p_programa(p):
     parser.assembly = f'{p[1]}\nSTART\nJUMP main\n{p[2]}\nmain:\n{p[3]}\nSTOP'
 
 def p_declaracoes(p):
-    'declaracoes : declaracao'
-    p[0] = f'{p[1]}'
+    'declaracoes :'
+    p[0] = f''
 
 def p_declaracoes2(p):
     'declaracoes : declaracoes declaracao'
@@ -44,17 +44,13 @@ def p_decaracao2(p):
         print("Error: Variavel já existe.")
         parser.exito = False
 
-def p_declaracao_vazio(p):
-    'declaracao :'
-    p[0] = f''
-
 def p_funcoes(p):
     'funcoes : funcoes funcao'
     p[0] = f'{p[1]}{p[2]}'
 
 def p_funcoes2(p):
-    'funcoes : funcao'
-    p[0] = f'{p[1]}'
+    'funcoes :'
+    p[0] = f''
 
 def p_funcao(p):
     'funcao : def chamada linhas retorna expressao ";" fim'
@@ -76,13 +72,9 @@ def p_funcao2(p):
         print("Error: Funçao ou variavel já existe.")
         parser.exito = False
 
-def p_funcao_vazio(p):
-    'funcao :'
-    p[0] = f''
-
 def p_linhas(p):
-    'linhas : linha'
-    p[0] = f'{p[1]}'
+    'linhas :'
+    p[0] = f''
 
 def p_linhas2(p):
     'linhas : linhas linha'
@@ -95,10 +87,6 @@ def p_linha(p):
 def p_linha2(p):
     'linha : comando'
     p[0] = f'{p[1]}'
-
-def p_linha_vazio(p):
-    'linha :'
-    p[0] = f''
 
 def p_comando(p):
     'comando : cescreva'
@@ -149,10 +137,14 @@ def p_expressao6(p):
     p[0] = f'{p[1]}{p[3]}DIV\n'
 
 def p_expressao7(p):
+    'expressao : expressao mod expressao'
+    p[0] = f'{p[1]}{p[3]}MOD\n'
+
+def p_expressao8(p):
     'expressao :  E_parentese expressao D_parentese'
     p[0] = f'{p[2]}'
 
-def p_expressao8(p):
+def p_expressao9(p):
     'expressao : chamada'
     if p[1] in p.parser.funcoesComRetorno:
         p[0] = f'PUSHA func{p.parser.funcoesComRetorno.get(p[1])}\nCALL\n'
