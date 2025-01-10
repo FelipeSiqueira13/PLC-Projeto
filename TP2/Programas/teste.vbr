@@ -1,0 +1,8 @@
+inteiro x = 70;
+se (x >= 20 e x < 66) entao
+    escreva("está na idade de trabalhar");
+senaose(x < 20) entao
+    escreva("vai estudar criança");
+senao
+    escreva("pode se reformar");
+fim

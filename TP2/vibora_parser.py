@@ -264,12 +264,17 @@ def p_textvar2(p):
     p[0] = f'{p[1]}'
 
 def p_final(p):
-    'escrevatextofinal : VAR'
-    p[0] = f'PUSHG {p.parser.registers.get(p[1])}\nWRITEI\n'
+    'escrevatextofinal : condicoes'
+    p[0] = f'{p[1]}WRITEI\n'
 
 def p_final2(p):
+    'escrevatextofinal : expressao'
+    p[0] = f'{p[1]}WRITEI\n'
+
+def p_final3(p):
     'escrevatextofinal : TEXTO'
     p[0] = f'PUSHS {p[1]}\nWRITES\n'
+
 
 def p_error(p):
     if p:

@@ -1,0 +1,38 @@
+PUSHI 70
+
+START
+JUMP main
+
+main:
+PUSHG 0
+PUSHI 20
+SUPEQ
+PUSHG 0
+PUSHI 66
+INF
+AND
+JZ else2
+PUSHS "está na idade de trabalhar"
+WRITES
+PUSHS"\n"
+WRITES
+JUMP fim2
+else2:
+PUSHG 0
+PUSHI 20
+INF
+JZ else1
+PUSHS "vai estudar criança"
+WRITES
+PUSHS"\n"
+WRITES
+JUMP fim1
+else1:
+PUSHS "pode se reformar"
+WRITES
+PUSHS"\n"
+WRITES
+fim1:
+fim2:
+
+STOP
