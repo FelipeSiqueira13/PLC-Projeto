@@ -21,6 +21,9 @@ tokens = (
     'soma', 'subtracao', 'multiplicacao', 'divisao', 'mod', 'abs', 'elevado'
 )
 
+def t_chamada(t):
+    r'[a-zA-Z][a-zA-Z0-9]*\(\)'
+    return t
 
     # Declarações
 def t_DECINTEIRO(t):
@@ -143,9 +146,6 @@ def t_elevado(t):
     r'\^'
     return t
 
-def t_chamada(t):
-    r'[a-zA-Z][a-zA-Z0-9]*\(\)'
-    return t
 
 def t_VAR(t):
     r'[a-zA-Z][a-zA-Z0-9]*'
@@ -166,7 +166,7 @@ def t_error(t):
 lexer = lex.lex()
 
 if __name__ == "__main__":
-    with open(f'.\\TP2\\Programas\\elevado.vbr', "r") as f:
+    with open(f'.\\TP2\\Programas\\teste.vbr', "r") as f:
         data = f.read()
     lexer.input(data)
     for token in lexer:

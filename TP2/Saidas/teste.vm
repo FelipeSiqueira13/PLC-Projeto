@@ -1,38 +1,46 @@
-PUSHI 70
+PUSHI 5
 
 START
 JUMP main
+func1:
+inicioloop1:
+PUSHG 0
+PUSHI 1
+SUPEQ
+JZ fimloop1
+PUSHG 0
+PUSHI 2
+SUB
+STOREG 0
+JUMP inicioloop1
+fimloop1:
+RETURN
 
 main:
+PUSHA func1
+CALL
 PUSHG 0
-PUSHI 20
-SUPEQ
-PUSHG 0
-PUSHI 66
-INF
-AND
-JZ else2
-PUSHS "está na idade de trabalhar"
-WRITES
-PUSHS"\n"
-WRITES
-JUMP fim2
-else2:
-PUSHG 0
-PUSHI 20
-INF
+PUSHI 1
+EQUAL
 JZ else1
-PUSHS "vai estudar criança"
+PUSHS "X e impar"
 WRITES
 PUSHS"\n"
 WRITES
 JUMP fim1
 else1:
-PUSHS "pode se reformar"
+PUSHS "x e par"
 WRITES
 PUSHS"\n"
 WRITES
 fim1:
-fim2:
+PUSHS "acabou o loop com x ="
+WRITES
+PUSHS " "
+WRITES
+PUSHG 0
+WRITEI
+PUSHS"\n"
+WRITES
 
 STOP

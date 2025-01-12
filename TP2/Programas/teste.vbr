@@ -1,8 +1,16 @@
-inteiro x = 70;
-se (x >= 20 e x < 66) entao
-    escreva("está na idade de trabalhar");
-senaose(x < 20) entao
-    escreva("vai estudar criança");
-senao
-    escreva("pode se reformar");
+inteiro x = 5;
+
+def epar()
+    enquanto (x >= 1) faz
+        x = x - 2;
+    fim
+    retorna;
 fim
+
+epar();
+se (x == 1) entao
+    escreva("X e impar");
+senao
+    escreva("x e par");
+fim
+escreva("acabou o loop com x =",x);
