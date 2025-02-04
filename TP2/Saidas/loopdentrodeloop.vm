@@ -1,0 +1,53 @@
+PUSHI 2
+PUSHI 1
+
+START
+JUMP main
+
+main:
+inicioloop2:
+PUSHG 0
+PUSHI 10
+INF
+JZ fimloop2
+inicioloop1:
+PUSHG 1
+PUSHI 10
+INF
+JZ fimloop1
+PUSHG 0
+WRITEI
+PUSHS " "
+WRITES
+PUSHS "x"
+WRITES
+PUSHS " "
+WRITES
+PUSHG 1
+WRITEI
+PUSHS " "
+WRITES
+PUSHS "é"
+WRITES
+PUSHS " "
+WRITES
+PUSHG 0
+PUSHG 1
+MUL
+WRITEI
+PUSHS"\n"
+WRITES
+PUSHG 1
+PUSHI 1
+ADD
+STOREG 1
+JUMP inicioloop1
+fimloop1:
+PUSHG 0
+PUSHI 1
+ADD
+STOREG 0
+JUMP inicioloop2
+fimloop2:
+
+STOP

@@ -1,0 +1,13 @@
+inteiro i = 2;
+inteiro j = 1;
+
+enquanto (i < 10) faz
+
+    enquanto (j < 10) faz
+
+        escreva(i,"x",j,"é",i*j);
+        j = j+1;
+
+    fim
+    i = i+1;
+fim

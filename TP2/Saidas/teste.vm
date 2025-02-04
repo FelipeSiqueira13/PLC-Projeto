@@ -1,44 +1,32 @@
+PUSHI 2
 PUSHI 5
 
 START
 JUMP main
-func1:
-inicioloop1:
-PUSHG 0
-PUSHI 1
-SUPEQ
-JZ fimloop1
-PUSHG 0
-PUSHI 2
-SUB
-STOREG 0
-JUMP inicioloop1
-fimloop1:
-RETURN
 
 main:
-PUSHA func1
-CALL
 PUSHG 0
+DUP 1
+PUSHG 1
 PUSHI 1
-EQUAL
-JZ else1
-PUSHS "X e impar"
-WRITES
-PUSHS"\n"
-WRITES
-JUMP fim1
-else1:
-PUSHS "x e par"
-WRITES
-PUSHS"\n"
-WRITES
-fim1:
-PUSHS "acabou o loop com x ="
-WRITES
-PUSHS " "
-WRITES
-PUSHG 0
+SUB
+inicioloopPreDef1:
+DUP 1
+JZ fimloopPreDef1
+SWAP
+PUSHSP
+PUSHI -2
+PADD
+LOAD 0
+MUL
+SWAP
+PUSHI 1
+SUB
+JUMP inicioloopPreDef1
+fimloopPreDef1:
+POP 1
+SWAP
+POP 1
 WRITEI
 PUSHS"\n"
 WRITES

@@ -1,16 +1,4 @@
-inteiro x = 5;
+inteiro x = 2;
+inteiro y = 5;
 
-def epar()
-    enquanto (x >= 1) faz
-        x = x - 2;
-    fim
-    retorna;
-fim
-
-epar();
-se (x == 1) entao
-    escreva("X e impar");
-senao
-    escreva("x e par");
-fim
-escreva("acabou o loop com x =",x);
+escreva(x^y);
